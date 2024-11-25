@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
+#include <SOIL2.h>
 
 // Variables to move the camera
 GLfloat camXInit = 0.0;
@@ -89,10 +90,43 @@ void drawAxes() {
 	glEnd();
 }
 
+//For texture image
+GLuint glassTexture;
+GLuint containerTexture;
+
+//Read the image to texture image
+void loadTextures() {
+	// SOIL_load
+	glassTexture = SOIL_load_OGL_texture(
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/glassTexture.jpg",  // Replace with the path to your texture file
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!glassTexture) {
+		printf("Texture loading failed: %s\n", SOIL_last_result());
+	}
+
+	containerTexture = SOIL_load_OGL_texture(
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/containerTexture.jpg",  // Replace with the path to your texture file
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!containerTexture) {
+		printf("Texture loading failed: %s\n", SOIL_last_result());
+	}
+}
+
+
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
+
+	loadTextures();
 }
 
 // Intensity of the light source
@@ -150,6 +184,7 @@ void setLightingandShading() {
 }
 
 // Jet Bridge
+/*
 void container_jetBridge() {
 	glBegin(GL_QUADS);
 
@@ -183,7 +218,47 @@ void container_jetBridge() {
 
 	glEnd();
 }
+*/
 
+void container_jetBridge() {
+	// Enable texturing
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, containerTexture);
+
+	glBegin(GL_QUADS);
+
+	// Front Face with texture
+	glColor3f(1.0f, 1.0f, 1.0f); // White to avoid blending
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 0, 0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 1, 0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 1, 0);
+
+	// Back Face with texture
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 0, -1);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 0, -1);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 1, -1);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 1, -1);
+
+	// Bottom Face with texture
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 0, 0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 0, -1);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 0, -1);
+
+	// Top Face with texture
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 1, 0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 1, 0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 1, -1);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 1, -1);
+
+	glEnd();
+
+	glDisable(GL_TEXTURE_2D); // Disable texturing
+}
+
+
+/*
 void containerGlass_jetBridge() {
 	glBegin(GL_QUADS);
 
@@ -202,6 +277,33 @@ void containerGlass_jetBridge() {
 	glVertex3f(0.2, 0.9, -1.01);
 
 	glEnd();
+}
+*/
+
+void containerGlass_jetBridge() {
+	// Enable texturing
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, glassTexture);
+
+	glBegin(GL_QUADS);
+
+	// Front Face with texture
+	glColor3f(1.0f, 1.0f, 1.0f); // White color to avoid blending with color
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.2, 0.1, 0.01);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.8, 0.1, 0.01);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.8, 0.9, 0.01);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.2, 0.9, 0.01);
+
+	// Back Face with texture
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.2, 0.1, -1.01);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.8, 0.1, -1.01);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.8, 0.9, -1.01);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.2, 0.9, -1.01);
+
+	glEnd();
+
+	// Disable texturing
+	glDisable(GL_TEXTURE_2D);
 }
 
 void containerBigger_jetBridge() {
@@ -328,7 +430,7 @@ void display(void) {
 
 	// setLightingandShading();
 
-	// Bicycle Drawing
+	// Drawing
 	glPushMatrix();
 	glTranslated(3, 0.1, -0.1);
 	container_jetBridge();
@@ -337,8 +439,8 @@ void display(void) {
 
 	//containerConnector_jetBridge();
 	//containerConnector_jetBridge();
-	containerBigger_jetBridge();
-	containerGlassBigger_jetBridge();
+	//containerBigger_jetBridge();
+	//containerGlassBigger_jetBridge();
 
 	glPushMatrix();
 	glTranslated(-2, 0.1, -0.1);
