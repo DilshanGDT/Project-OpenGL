@@ -136,7 +136,6 @@ void init(void)
 // Intensity of the light source
 void light0(GLfloat offset, GLfloat posOffset)
 {
-
 	// (r, g, b, opacity)
 	GLfloat l0amb[] = {0.2 + offset, 0.2 + offset, 0.2 + offset, 1.0};
 	GLfloat l0diff[] = {0.8 - offset, 0.8 - offset, 0.8 - offset, 1.0};
@@ -604,7 +603,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(0, 0);
-	glutCreateWindow("Bandaranaike_International_Airport");
+	glutCreateWindow("Bandaranaike_International_Airport_JetBridge");
 
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(keyboardSpecial);
