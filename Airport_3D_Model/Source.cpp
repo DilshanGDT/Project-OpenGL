@@ -54,12 +54,14 @@ GLfloat doorXInit = closeDoorXInit;
 static float dRot;
 
 // Grid and coordinate axes for better visualization
-void drawGrid() {
+void drawGrid()
+{
 	GLfloat step = 1.0f;
 	GLint line;
 
 	glBegin(GL_LINES);
-	for (line = -20; line <= 20; line += step) {
+	for (line = -20; line <= 20; line += step)
+	{
 		glVertex3f(line, -0.4, 20);
 		glVertex3f(line, -0.4, -20);
 
@@ -69,7 +71,8 @@ void drawGrid() {
 	glEnd();
 }
 
-void drawAxes() {
+void drawAxes()
+{
 
 	glBegin(GL_LINES);
 
@@ -90,38 +93,39 @@ void drawAxes() {
 	glEnd();
 }
 
-//For texture image
+// For texture image
 GLuint glassTexture;
 GLuint containerTexture;
 
-//Read the image to texture image
-void loadTextures() {
+// Read the image to texture image
+void loadTextures()
+{
 	// SOIL_load
 	glassTexture = SOIL_load_OGL_texture(
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/glassTexture.jpg",  // Replace with the path to your texture file
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/glassTexture.jpg", // Replace with the path to your texture file
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
-	);
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
 
-	if (!glassTexture) {
+	if (!glassTexture)
+	{
 		printf("Texture loading failed: %s\n", SOIL_last_result());
 	}
 
 	containerTexture = SOIL_load_OGL_texture(
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/containerTexture.jpg",  // Replace with the path to your texture file
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/containerTexture.jpg", // Replace with the path to your texture file
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
-	);
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
 
-	if (!containerTexture) {
+	if (!containerTexture)
+	{
 		printf("Texture loading failed: %s\n", SOIL_last_result());
 	}
 }
 
-
-void init(void) {
+void init(void)
+{
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
@@ -130,15 +134,16 @@ void init(void) {
 }
 
 // Intensity of the light source
-void light0(GLfloat offset, GLfloat posOffset) {
+void light0(GLfloat offset, GLfloat posOffset)
+{
 
 	// (r, g, b, opacity)
-	GLfloat l0amb[] = { 0.2 + offset, 0.2 + offset, 0.2 + offset, 1.0 };
-	GLfloat l0diff[] = { 0.8 - offset, 0.8 - offset, 0.8 - offset, 1.0 };
-	GLfloat l0spec[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat l0amb[] = {0.2 + offset, 0.2 + offset, 0.2 + offset, 1.0};
+	GLfloat l0diff[] = {0.8 - offset, 0.8 - offset, 0.8 - offset, 1.0};
+	GLfloat l0spec[] = {1.0, 1.0, 1.0, 1.0};
 
 	// Light source position : (x, y, z, type_of_the_light_source)
-	GLfloat l0pos[] = { -10 + posOffset, 1.0, -0.5, 1.0 };
+	GLfloat l0pos[] = {-10 + posOffset, 1.0, -0.5, 1.0};
 
 	// Set the illumination or intensity (ambiant, diffusion, specular)
 	glGetLightfv(GL_LIGHT0, GL_AMBIENT, l0amb);
@@ -150,17 +155,18 @@ void light0(GLfloat offset, GLfloat posOffset) {
 }
 
 // Set Properties of light sources and materials
-void setLightingandShading() {
+void setLightingandShading()
+{
 	// Enable light
-	glEnable(GL_LIGHTING); //Tell opengl that we are setting custom lighting
+	glEnable(GL_LIGHTING); // Tell opengl that we are setting custom lighting
 
 	// Create light
 	// Define the illumination or intensity of the light source
-	GLfloat l0amb[] = { 0.2, 0.2, 0.2, 1.0 };
-	GLfloat l0diff[] = { 0.8, 0.8, 0.8, 1.0 };
-	GLfloat l0spec[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat l0amb[] = {0.2, 0.2, 0.2, 1.0};
+	GLfloat l0diff[] = {0.8, 0.8, 0.8, 1.0};
+	GLfloat l0spec[] = {1.0, 1.0, 1.0, 1.0};
 
-	GLfloat l0pos[] = { -10, 1.0, -0.5, 1.0 };
+	GLfloat l0pos[] = {-10, 1.0, -0.5, 1.0};
 
 	// Set the illumination or intensity (ambiant, diffusion, specular)
 	glGetLightfv(GL_LIGHT0, GL_AMBIENT, l0amb);
@@ -176,7 +182,7 @@ void setLightingandShading() {
 
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
-	GLfloat specRef[] = { 0.7, 0.7,0.7, 1.0 };
+	GLfloat specRef[] = {0.7, 0.7, 0.7, 1.0};
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specRef);
 
 	GLint shiness = 128;
@@ -220,7 +226,8 @@ void container_jetBridge() {
 }
 */
 
-void container_jetBridge() {
+void container_jetBridge()
+{
 	// Enable texturing
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, containerTexture);
@@ -229,34 +236,49 @@ void container_jetBridge() {
 
 	// Front Face with texture
 	glColor3f(1.0f, 1.0f, 1.0f); // White to avoid blending
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 0, 0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 0, 0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 1, 0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 1, 0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2, 0, 0);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2, 1, 0);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 1, 0);
 
 	// Back Face with texture
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 0, -1);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 0, -1);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 1, -1);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 1, -1);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0, -1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2, 0, -1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2, 1, -1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 1, -1);
 
 	// Bottom Face with texture
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 0, 0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 0, 0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 0, -1);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 0, -1);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2, 0, 0);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2, 0, -1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 0, -1);
 
 	// Top Face with texture
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0, 1, 0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(2, 1, 0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(2, 1, -1);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0, 1, -1);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 1, 0);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2, 1, 0);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2, 1, -1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 1, -1);
 
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D); // Disable texturing
 }
-
 
 /*
 void containerGlass_jetBridge() {
@@ -280,7 +302,8 @@ void containerGlass_jetBridge() {
 }
 */
 
-void containerGlass_jetBridge() {
+void containerGlass_jetBridge()
+{
 	// Enable texturing
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, glassTexture);
@@ -289,16 +312,24 @@ void containerGlass_jetBridge() {
 
 	// Front Face with texture
 	glColor3f(1.0f, 1.0f, 1.0f); // White color to avoid blending with color
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.2, 0.1, 0.01);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.8, 0.1, 0.01);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.8, 0.9, 0.01);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.2, 0.9, 0.01);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.2, 0.1, 0.01);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.8, 0.1, 0.01);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.8, 0.9, 0.01);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.2, 0.9, 0.01);
 
 	// Back Face with texture
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.2, 0.1, -1.01);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.8, 0.1, -1.01);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.8, 0.9, -1.01);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.2, 0.9, -1.01);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.2, 0.1, -1.01);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.8, 0.1, -1.01);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.8, 0.9, -1.01);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.2, 0.9, -1.01);
 
 	glEnd();
 
@@ -306,7 +337,8 @@ void containerGlass_jetBridge() {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void containerBigger_jetBridge() {
+void containerBigger_jetBridge()
+{
 	glBegin(GL_QUADS);
 
 	// Front Face (Red)
@@ -341,7 +373,7 @@ void containerBigger_jetBridge() {
 
 	glPushMatrix();
 	glRotated(90, 0, 1, 0);
-	//glTranslated(-0.1, -0.1, 0);
+	// glTranslated(-0.1, -0.1, 0);
 
 	glBegin(GL_QUADS);
 
@@ -364,7 +396,8 @@ void containerBigger_jetBridge() {
 	glPopMatrix();
 }
 
-void containerGlassBigger_jetBridge() {
+void containerGlassBigger_jetBridge()
+{
 	glBegin(GL_QUADS);
 
 	// Front Face (Blue)
@@ -384,10 +417,11 @@ void containerGlassBigger_jetBridge() {
 	glEnd();
 }
 
-void containerConnector_jetBridge() {
+void containerConnector_jetBridge()
+{
 	glPushMatrix();
 	glRotated(90, 0, 1, 0);
-	//glTranslated(-0.1, -0.1, 0);
+	// glTranslated(-0.1, -0.1, 0);
 
 	glBegin(GL_QUADS);
 
@@ -410,7 +444,8 @@ void containerConnector_jetBridge() {
 	glPopMatrix();
 }
 
-void display(void) {
+void display(void)
+{
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
@@ -437,10 +472,10 @@ void display(void) {
 	containerGlass_jetBridge();
 	glPopMatrix();
 
-	//containerConnector_jetBridge();
-	//containerConnector_jetBridge();
-	//containerBigger_jetBridge();
-	//containerGlassBigger_jetBridge();
+	// containerConnector_jetBridge();
+	// containerConnector_jetBridge();
+	// containerBigger_jetBridge();
+	// containerGlassBigger_jetBridge();
 
 	glPushMatrix();
 	glTranslated(-2, 0.1, -0.1);
@@ -454,24 +489,25 @@ void display(void) {
 	containerGlass_jetBridge();
 	glPopMatrix();
 
-
 	glPopMatrix();
 	glutSwapBuffers();
 }
 
-void reshape(GLsizei w, GLsizei h) {
+void reshape(GLsizei w, GLsizei h)
+{
 	glViewport(0, 0, w, h);
 	GLfloat aspect_ratio = h == 0 ? w / 1 : (GLfloat)w / (GLfloat)h;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	//Define the Perspective projection frustum
-	// (FOV_in_vertical, aspect_ratio, z-distance to the near plane from the camera position, z-distance to far plane from the camera position)
+	// Define the Perspective projection frustum
+	//  (FOV_in_vertical, aspect_ratio, z-distance to the near plane from the camera position, z-distance to far plane from the camera position)
 	gluPerspective(120.0, aspect_ratio, 1.0, 100.0);
 }
 
-void keyboardSpecial(int key, int x, int y) {
+void keyboardSpecial(int key, int x, int y)
+{
 
 	if (key == GLUT_KEY_UP)
 		camY += 0.5;
@@ -490,7 +526,8 @@ void keyboardSpecial(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-void keyboard(unsigned char key, int x, int y) {
+void keyboard(unsigned char key, int x, int y)
+{
 
 	if (key == 'y')
 		sceRY += 1;
@@ -510,22 +547,26 @@ void keyboard(unsigned char key, int x, int y) {
 	if (key == 'z')
 		sceTZ -= 1;
 
-	if (key == 'w') {
+	if (key == 'w')
+	{
 		sceTZ += 1;
 		objTZ -= 1;
 	}
 
-	if (key == 's') {
+	if (key == 's')
+	{
 		sceTZ -= 1;
 		objTZ += 1;
 	}
 
-	if (key == 'a') {
+	if (key == 'a')
+	{
 		sceTY += 1;
 		objTY -= 1;
 	}
 
-	if (key == 'd') {
+	if (key == 'd')
+	{
 		sceTY -= 1;
 		objTY += 1;
 	}
@@ -557,7 +598,8 @@ void keyboard(unsigned char key, int x, int y) {
 	glutPostRedisplay();
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
