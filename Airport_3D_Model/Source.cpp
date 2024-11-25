@@ -98,7 +98,7 @@ GLuint containerTexture;
 void loadTextures() {
 	// SOIL_load
 	glassTexture = SOIL_load_OGL_texture(
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/glassTexture.jpg",  // Replace with the path to your texture file
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/glassTexture.jpg",  // Replace with the path to your texture file
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
@@ -109,7 +109,7 @@ void loadTextures() {
 	}
 
 	containerTexture = SOIL_load_OGL_texture(
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/containerTexture.jpg",  // Replace with the path to your texture file
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/containerTexture.jpg",  // Replace with the path to your texture file
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
