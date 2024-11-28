@@ -137,12 +137,12 @@ void init(void)
 void light0(GLfloat offset, GLfloat posOffset)
 {
 	// (r, g, b, opacity)
-	GLfloat l0amb[] = {0.2 + offset, 0.2 + offset, 0.2 + offset, 1.0};
-	GLfloat l0diff[] = {0.8 - offset, 0.8 - offset, 0.8 - offset, 1.0};
-	GLfloat l0spec[] = {1.0, 1.0, 1.0, 1.0};
+	GLfloat l0amb[] = { 0.2 + offset, 0.2 + offset, 0.2 + offset, 1.0 };
+	GLfloat l0diff[] = { 0.8 - offset, 0.8 - offset, 0.8 - offset, 1.0 };
+	GLfloat l0spec[] = { 1.0, 1.0, 1.0, 1.0 };
 
 	// Light source position : (x, y, z, type_of_the_light_source)
-	GLfloat l0pos[] = {-10 + posOffset, 1.0, -0.5, 1.0};
+	GLfloat l0pos[] = { -10 + posOffset, 1.0, -0.5, 1.0 };
 
 	// Set the illumination or intensity (ambiant, diffusion, specular)
 	glGetLightfv(GL_LIGHT0, GL_AMBIENT, l0amb);
@@ -161,11 +161,11 @@ void setLightingandShading()
 
 	// Create light
 	// Define the illumination or intensity of the light source
-	GLfloat l0amb[] = {0.2, 0.2, 0.2, 1.0};
-	GLfloat l0diff[] = {0.8, 0.8, 0.8, 1.0};
-	GLfloat l0spec[] = {1.0, 1.0, 1.0, 1.0};
+	GLfloat l0amb[] = { 0.2, 0.2, 0.2, 1.0 };
+	GLfloat l0diff[] = { 0.8, 0.8, 0.8, 1.0 };
+	GLfloat l0spec[] = { 1.0, 1.0, 1.0, 1.0 };
 
-	GLfloat l0pos[] = {-10, 1.0, -0.5, 1.0};
+	GLfloat l0pos[] = { -10, 1.0, -0.5, 1.0 };
 
 	// Set the illumination or intensity (ambiant, diffusion, specular)
 	glGetLightfv(GL_LIGHT0, GL_AMBIENT, l0amb);
@@ -181,7 +181,7 @@ void setLightingandShading()
 
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
-	GLfloat specRef[] = {0.7, 0.7, 0.7, 1.0};
+	GLfloat specRef[] = { 0.7, 0.7, 0.7, 1.0 };
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specRef);
 
 	GLint shiness = 128;
@@ -597,7 +597,7 @@ void keyboard(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
