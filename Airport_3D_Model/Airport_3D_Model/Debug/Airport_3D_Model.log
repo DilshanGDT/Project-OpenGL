@@ -1,12 +1,8 @@
 ﻿  source.cpp
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(140,26): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(140,40): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(140,54): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(141,27): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(141,41): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(141,55): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-soil2-debug.lib(image_DXT.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(image_DXT.obj)' or at ''; linking object as if no debug info
-soil2-debug.lib(image_helper.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(image_helper.obj)' or at ''; linking object as if no debug info
-soil2-debug.lib(SOIL2.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(SOIL2.obj)' or at ''; linking object as if no debug info
-soil2-debug.lib(wfETC.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(wfETC.obj)' or at ''; linking object as if no debug info
+C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(88,26): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(88,40): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(88,54): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(89,27): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(89,41): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(89,55): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
   Airport_3D_Model.vcxproj -> C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\Debug\Airport_3D_Model.exe
