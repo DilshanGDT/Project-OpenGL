@@ -3,53 +3,25 @@
 #include <stdio.h>
 #include <SOIL2.h>
 
-// Variables to move the camera
-GLfloat camXInit = 0.0;
-GLfloat camYInit = 0.0;
-GLfloat camZInit = 0.0;
+#include "JetBridge.h"	// JetBridge class
 
-GLfloat camX = camXInit;
-GLfloat camY = camYInit;
-GLfloat camZ = camZInit;
+// Variables to move the camera
+GLfloat camXInit = 0.0;		GLfloat camYInit = 0.0;		GLfloat camZInit = 0.0;
+GLfloat camX = camXInit;	GLfloat camY = camYInit;	GLfloat camZ = camZInit;
 
 // Variables to move the scene
-GLfloat sceRXInit = 0.0;
-GLfloat sceRYInit = 0.0;
-GLfloat sceRZInit = 0.0;
-GLfloat sceTXInit = 0.0;
-GLfloat sceTYInit = 0.0;
-GLfloat sceTZInit = 0.0;
+GLfloat sceRXInit = 0.0;	GLfloat sceRYInit = 0.0;	GLfloat sceRZInit = 0.0;
+GLfloat sceTXInit = 0.0;	GLfloat sceTYInit = 0.0;	GLfloat sceTZInit = 0.0;
 
-GLfloat sceRX = sceRXInit;
-GLfloat sceRY = sceRYInit;
-GLfloat sceRZ = sceRZInit;
-GLfloat sceTX = sceTXInit;
-GLfloat sceTY = sceTYInit;
-GLfloat sceTZ = sceTZInit;
+GLfloat sceRX = sceRXInit;	GLfloat sceRY = sceRYInit;	GLfloat sceRZ = sceRZInit;
+GLfloat sceTX = sceTXInit;	GLfloat sceTY = sceTYInit;	GLfloat sceTZ = sceTZInit;
 
 // Variables to move the looking position
-GLfloat lookX = 0.0;
-GLfloat lookY = 0.0;
-GLfloat lookZ = 0.0;
+GLfloat lookX = 0.0;		GLfloat lookY = 0.0;		GLfloat lookZ = 0.0;
 
 // Variables to move the objects
-GLfloat objRX = 0.0;
-GLfloat objRY = 0.0;
-GLfloat objRZ = 0.0;
-GLfloat objTX = 0.0;
-GLfloat objTY = 0.0;
-GLfloat objTZ = 0.0;
-
-GLfloat openDoorAngle = 60;
-GLfloat openDoorZ = -0.05;
-GLfloat openDoorXInit = -0.4;
-GLfloat closeDoorAngle = 0;
-GLfloat closeDoorZ = 0;
-GLfloat closeDoorXInit = -0.5;
-
-GLfloat doorAngle = closeDoorAngle;
-GLfloat doorZ = closeDoorZ;
-GLfloat doorXInit = closeDoorXInit;
+GLfloat objRX = 0.0;		GLfloat objRY = 0.0;		GLfloat objRZ = 0.0;
+GLfloat objTX = 0.0;		GLfloat objTY = 0.0;		GLfloat objTZ = 0.0;
 
 static float dRot;
 
@@ -93,35 +65,10 @@ void drawAxes()
 	glEnd();
 }
 
-// For texture image
-GLuint glassTexture;
-GLuint containerTexture;
-
 // Read the image to texture image
 void loadTextures()
 {
-	// SOIL_load
-	glassTexture = SOIL_load_OGL_texture(
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/glassTexture.jpg", // Replace with the path to your texture file
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
 
-	if (!glassTexture)
-	{
-		printf("Texture loading failed: %s\n", SOIL_last_result());
-	}
-
-	containerTexture = SOIL_load_OGL_texture(
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Project-OpenGL/Airport_3D_Model/images/containerTexture.jpg", // Replace with the path to your texture file
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
-
-	if (!containerTexture)
-	{
-		printf("Texture loading failed: %s\n", SOIL_last_result());
-	}
 }
 
 void init(void)
@@ -130,7 +77,8 @@ void init(void)
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
 
-	loadTextures();
+	// loadTextures();
+	loadJetBridgeTextures(); // Load JetBridge textures
 }
 
 // Intensity of the light source
@@ -188,260 +136,7 @@ void setLightingandShading()
 	glMateriali(GL_FRONT, GL_SHININESS, shiness);
 }
 
-// Jet Bridge
-/*
-void container_jetBridge() {
-	glBegin(GL_QUADS);
-
-	// Front Face (Red)
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0, 0, 0);
-	glVertex3f(2, 0, 0);
-	glVertex3f(2, 1, 0);
-	glVertex3f(0, 1, 0);
-
-	// Back Face (Red)
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0, 0, -1);
-	glVertex3f(2, 0, -1);
-	glVertex3f(2, 1, -1);
-	glVertex3f(0, 1, -1);
-
-	// Bottom Face (Green)
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0, 0, 0);
-	glVertex3f(2, 0, 0);
-	glVertex3f(2, 0, -1);
-	glVertex3f(0, 0, -1);
-
-	// Top Face (Green)
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0, 1, 0);
-	glVertex3f(2, 1, 0);
-	glVertex3f(2, 1, -1);
-	glVertex3f(0, 1, -1);
-
-	glEnd();
-}
-*/
-
-void container_jetBridge()
-{
-	// Enable texturing
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, containerTexture);
-
-	glBegin(GL_QUADS);
-
-	// Front Face with texture
-	glColor3f(1.0f, 1.0f, 1.0f); // White to avoid blending
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0, 0, 0);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(2, 0, 0);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(2, 1, 0);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(0, 1, 0);
-
-	// Back Face with texture
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0, 0, -1);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(2, 0, -1);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(2, 1, -1);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(0, 1, -1);
-
-	// Bottom Face with texture
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0, 0, 0);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(2, 0, 0);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(2, 0, -1);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(0, 0, -1);
-
-	// Top Face with texture
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0, 1, 0);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(2, 1, 0);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(2, 1, -1);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(0, 1, -1);
-
-	glEnd();
-
-	glDisable(GL_TEXTURE_2D); // Disable texturing
-}
-
-/*
-void containerGlass_jetBridge() {
-	glBegin(GL_QUADS);
-
-	// Front Face (Blue)
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.2, 0.1, 0.01);
-	glVertex3f(1.8, 0.1, 0.01);
-	glVertex3f(1.8, 0.9, 0.01);
-	glVertex3f(0.2, 0.9, 0.01);
-
-	// Back Face (Blue)
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.2, 0.1, -1.01);
-	glVertex3f(1.8, 0.1, -1.01);
-	glVertex3f(1.8, 0.9, -1.01);
-	glVertex3f(0.2, 0.9, -1.01);
-
-	glEnd();
-}
-*/
-
-void containerGlass_jetBridge()
-{
-	// Enable texturing
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, glassTexture);
-
-	glBegin(GL_QUADS);
-
-	// Front Face with texture
-	glColor3f(1.0f, 1.0f, 1.0f); // White color to avoid blending with color
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0.2, 0.1, 0.01);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(1.8, 0.1, 0.01);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(1.8, 0.9, 0.01);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(0.2, 0.9, 0.01);
-
-	// Back Face with texture
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0.2, 0.1, -1.01);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(1.8, 0.1, -1.01);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(1.8, 0.9, -1.01);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(0.2, 0.9, -1.01);
-
-	glEnd();
-
-	// Disable texturing
-	glDisable(GL_TEXTURE_2D);
-}
-
-void containerBigger_jetBridge()
-{
-	glBegin(GL_QUADS);
-
-	// Front Face (Red)
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0, 0, 0);
-	glVertex3f(3, 0, 0);
-	glVertex3f(3, 1.2, 0);
-	glVertex3f(0, 1.2, 0);
-
-	// Back Face (Red)
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0, 0, -1.2);
-	glVertex3f(3, 0, -1.2);
-	glVertex3f(3, 1.2, -1.2);
-	glVertex3f(0, 1.2, -1.2);
-
-	// Bottom Face (Green)
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0, 0, 0);
-	glVertex3f(3, 0, 0);
-	glVertex3f(3, 0, -1.2);
-	glVertex3f(0, 0, -1.2);
-
-	// Top Face (Green)
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(0, 1.2, 0);
-	glVertex3f(3, 1.2, 0);
-	glVertex3f(3, 1.2, -1.2);
-	glVertex3f(0, 1.2, -1.2);
-
-	glEnd();
-
-	glPushMatrix();
-	glRotated(90, 0, 1, 0);
-	// glTranslated(-0.1, -0.1, 0);
-
-	glBegin(GL_QUADS);
-
-	// Blue
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0, 0, 0);
-	glVertex3f(1.2, 0, 0);
-	glVertex3f(1.2, 1.2, 0);
-	glVertex3f(0, 1.2, 0);
-
-	// Blue
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0, 0, 3);
-	glVertex3f(1.2, 0, 3);
-	glVertex3f(1.2, 1.2, 3);
-	glVertex3f(0, 1.2, 3);
-
-	glEnd();
-
-	glPopMatrix();
-}
-
-void containerGlassBigger_jetBridge()
-{
-	glBegin(GL_QUADS);
-
-	// Front Face (Blue)
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.2, 0.1, 0.01);
-	glVertex3f(2.8, 0.1, 0.01);
-	glVertex3f(2.8, 1.1, 0.01);
-	glVertex3f(0.2, 1.1, 0.01);
-
-	// Back Face (Blue)
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.2, 0.1, -1.21);
-	glVertex3f(2.8, 0.1, -1.21);
-	glVertex3f(2.8, 1.1, -1.21);
-	glVertex3f(0.2, 1.1, -1.21);
-
-	glEnd();
-}
-
-void containerConnector_jetBridge()
-{
-	glPushMatrix();
-	glRotated(90, 0, 1, 0);
-	// glTranslated(-0.1, -0.1, 0);
-
-	glBegin(GL_QUADS);
-
-	// Blue
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0, 0, 0);
-	glVertex3f(1.2, 0, 0);
-	glVertex3f(1.2, 1.2, 0);
-	glVertex3f(0, 1.2, 0);
-
-	// Blue
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0, 0, 3);
-	glVertex3f(1.2, 0, 3);
-	glVertex3f(1.2, 1.2, 3);
-	glVertex3f(0, 1.2, 3);
-
-	glEnd();
-
-	glPopMatrix();
-}
+// Drawing Function Goes Here
 
 void display(void)
 {
@@ -465,28 +160,7 @@ void display(void)
 	// setLightingandShading();
 
 	// Drawing
-	glPushMatrix();
-	glTranslated(3, 0.1, -0.1);
-	container_jetBridge();
-	containerGlass_jetBridge();
-	glPopMatrix();
-
-	// containerConnector_jetBridge();
-	// containerConnector_jetBridge();
-	// containerBigger_jetBridge();
-	// containerGlassBigger_jetBridge();
-
-	glPushMatrix();
-	glTranslated(-2, 0.1, -0.1);
-	container_jetBridge();
-	containerGlass_jetBridge();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(-4, 0.1, -0.1);
-	container_jetBridge();
-	containerGlass_jetBridge();
-	glPopMatrix();
+	jetBridge();
 
 	glPopMatrix();
 	glutSwapBuffers();
@@ -501,13 +175,12 @@ void reshape(GLsizei w, GLsizei h)
 	glLoadIdentity();
 
 	// Define the Perspective projection frustum
-	//  (FOV_in_vertical, aspect_ratio, z-distance to the near plane from the camera position, z-distance to far plane from the camera position)
+	// (FOV_in_vertical, aspect_ratio, z-distance to the near plane from the camera position, z-distance to far plane from the camera position)
 	gluPerspective(120.0, aspect_ratio, 1.0, 100.0);
 }
 
 void keyboardSpecial(int key, int x, int y)
 {
-
 	if (key == GLUT_KEY_UP)
 		camY += 0.5;
 
@@ -527,7 +200,6 @@ void keyboardSpecial(int key, int x, int y)
 
 void keyboard(unsigned char key, int x, int y)
 {
-
 	if (key == 'y')
 		sceRY += 1;
 
