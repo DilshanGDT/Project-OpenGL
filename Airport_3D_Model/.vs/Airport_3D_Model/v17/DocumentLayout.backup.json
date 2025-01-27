@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{EE680C4F-C498-4293-B540-B62DA41B04B6}|Airport_3D_Model.vcxproj|C:\\Users\\Dilshan\\Documents\\VS Code\\CSC_3081\\Project-OpenGL\\Airport_3D_Model\\source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{EE680C4F-C498-4293-B540-B62DA41B04B6}|Airport_3D_Model.vcxproj|solutionrelative:source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE680C4F-C498-4293-B540-B62DA41B04B6}|Airport_3D_Model.vcxproj|C:\\Users\\Dilshan\\Documents\\VS Code\\CSC_3081\\Project-OpenGL\\Airport_3D_Model\\JetBridge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{EE680C4F-C498-4293-B540-B62DA41B04B6}|Airport_3D_Model.vcxproj|solutionrelative:JetBridge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,11 +18,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JetBridge.cpp",
+              "DocumentMoniker": "C:\\Users\\Dilshan\\Documents\\VS Code\\CSC_3081\\Project-OpenGL\\Airport_3D_Model\\JetBridge.cpp",
+              "RelativeDocumentMoniker": "JetBridge.cpp",
+              "ToolTip": "C:\\Users\\Dilshan\\Documents\\VS Code\\CSC_3081\\Project-OpenGL\\Airport_3D_Model\\JetBridge.cpp",
+              "RelativeToolTip": "JetBridge.cpp",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAAAOEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-27T05:26:58.091Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -28,7 +45,7 @@
               "RelativeDocumentMoniker": "source.cpp",
               "ToolTip": "C:\\Users\\Dilshan\\Documents\\VS Code\\CSC_3081\\Project-OpenGL\\Airport_3D_Model\\source.cpp",
               "RelativeToolTip": "source.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIBAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAI4BAAAAAAAAAAAowJwBAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-26T16:48:05.49Z",
               "EditorCaption": ""
