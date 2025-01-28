@@ -637,6 +637,7 @@ void wallSegment_pier() {
 	glVertex3f(-10, 2.5, -3);
 	glVertex3f(-10, 0, -3);
 
+	// single side
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glVertex3f(-10, 0, 0);
 	glVertex3f(0, 0, 0);
@@ -675,16 +676,53 @@ void wallSideSegment_pier() {
 	glTranslated(-5, 0, 3);
 	wallSegment_pier();
 	glPopMatrix();
+}
 
-	/*glPushMatrix();
-	glTranslated(15, 0, 0);
-	wallSegment_pier();
-	glPopMatrix();*/
+void singleWindow_pier() {
+	glPushMatrix();
+	glTranslated(0.8, 0.6, 0);
+	glScaled(1.2, 0.6, 1);
+	glBegin(GL_QUADS);
 
-	/*glPushMatrix();
-	glTranslated(30, 0, 0);
-	wallSegment_pier();
-	glPopMatrix();*/
+	//windows
+	glColor3f(0.2f, 0.2f, 0.5f);
+	glVertex3f(-8, 0.5, 0.01);
+	glVertex3f(-2, 0.5, 0.01);
+	glVertex3f(-2, 2.5, 0.01);
+	glVertex3f(-8, 2.5, 0.01);
+
+	glEnd();
+	glPopMatrix();
+}
+
+void allWindowsOneSide_pier() {
+	singleWindow_pier();
+
+	glPushMatrix();
+	glTranslated(25.5, 0, 0);
+	glScaled(2, 1, 1);
+	singleWindow_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(50, 0, 0);
+	glScaled(2, 1, 1);
+	singleWindow_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(65, 0, 0);
+	singleWindow_pier();
+	glPopMatrix();
+}
+
+void windows_pier() {
+	allWindowsOneSide_pier();
+
+	glPushMatrix();
+	glTranslated(0, 0, -3.1);
+	allWindowsOneSide_pier();
+	glPopMatrix();
 }
 
 void roofSegment_pier() {
@@ -774,6 +812,8 @@ void pier() {
 	glTranslated(50, 0, 0);
 	single_pier();
 	glPopMatrix();
+
+	windows_pier();
 }
 
 void display(void)
