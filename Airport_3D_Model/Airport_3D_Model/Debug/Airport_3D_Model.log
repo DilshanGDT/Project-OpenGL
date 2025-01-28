@@ -1,8 +1,1 @@
-﻿  source.cpp
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(100,26): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(100,40): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(100,54): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(101,27): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(101,41): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\source.cpp(101,55): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-  Airport_3D_Model.vcxproj -> C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\Debug\Airport_3D_Model.exe
+﻿  Airport_3D_Model.vcxproj -> C:\Users\Dilshan\Documents\VS Code\CSC_3081\Project-OpenGL\Airport_3D_Model\Debug\Airport_3D_Model.exe
