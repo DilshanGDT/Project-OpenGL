@@ -32,13 +32,13 @@ void drawGrid()
 	GLint line;
 
 	glBegin(GL_LINES);
-	for (line = -20; line <= 20; line += step)
+	for (line = -80; line <= 80; line += step)
 	{
-		glVertex3f(line, -0.4, 20);
-		glVertex3f(line, -0.4, -20);
+		glVertex3f(line, -0.4, 80);
+		glVertex3f(line, -0.4, -80);
 
-		glVertex3f(20, -0.4, line);
-		glVertex3f(-20, -0.4, line);
+		glVertex3f(80, -0.4, line);
+		glVertex3f(-80, -0.4, line);
 	}
 	glEnd();
 }
@@ -149,6 +149,8 @@ void setLightingandShading()
 }
 
 // Drawing Function Goes Here
+
+// terminal
 
 void singleWallSide_terminal() {
 
@@ -430,6 +432,350 @@ void terminal() {
 	concreteSupporters_terminal();
 }
 
+// building right
+
+void mainWalls_buildingR() {
+	glPushMatrix();
+	//glRotated(90, 0, 1, 0);
+	glTranslated(-4.8, 0, -3);
+	glBegin(GL_QUADS);
+
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(15, 0, 0);
+	glVertex3f(25, 0, 0);
+	glVertex3f(25, 3.5, 0);
+	glVertex3f(15, 3.5, 0);
+
+	glColor3f(0.5f, 0.7f, 0.5f);
+	glVertex3f(15, 0, 0);
+	glVertex3f(15, 0, -15);
+	glVertex3f(15, 3.5, -15);
+	glVertex3f(15, 3.5, 0);
+
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(15, 0, -15);
+	glVertex3f(35, 0, -15);
+	glVertex3f(35, 3.5, -15);
+	glVertex3f(15, 3.5, -15);
+
+	glColor3f(0.5f, 0.7f, 0.5f);
+	glVertex3f(25, 0, 0);
+	glVertex3f(35, 0, -15);
+	glVertex3f(35, 3.5, -15);
+	glVertex3f(25, 3.5, 0);
+
+	glEnd();
+	glPopMatrix();
+}
+
+void floor_buildingR() {
+	glPushMatrix();
+	//glRotated(90, 0, 1, 0);
+	glTranslated(-10.8, 0.05, -1);
+	glScaled(1.3, 1, 1.3);
+	glBegin(GL_QUADS);
+
+	//top
+	glColor3f(0.6f, 0.5f, 0.5f);
+	glVertex3f(15, 0, 0);
+	glVertex3f(25, 0, 0);
+	glVertex3f(35, 0, -15);
+	glVertex3f(15, 0, -15);
+
+	//bottom
+	glColor3f(0.6f, 0.5f, 0.5f);
+	glVertex3f(15, -0.2, 0);
+	glVertex3f(25, -0.2, 0);
+	glVertex3f(35, -0.2, -15);
+	glVertex3f(15, -0.2, -15);
+
+	//sides
+	glColor3f(0.6f, 0.6f, 0.8f);
+	glVertex3f(15, 0, 0);
+	glVertex3f(25, 0, 0);
+	glVertex3f(15, -0.2, 0);
+	glVertex3f(25, -0.2, 0);
+
+	glColor3f(0.6f, 0.6f, 0.8f);
+	glVertex3f(25, 0, 0);
+	glVertex3f(35, 0, -15);
+	glVertex3f(35, -0.2, -15);
+	glVertex3f(25, -0.2, 0);
+
+	glColor3f(0.6f, 0.6f, 0.8f);
+	glVertex3f(15, 0, -15);
+	glVertex3f(35, 0, -15);
+	glVertex3f(35, -0.2, -15);
+	glVertex3f(15, -0.2, -15);
+
+	glEnd();
+	glPopMatrix();
+}
+
+void roof_buildingR() {
+	glPushMatrix();
+	glColor3f(1, 0.4, 0.5);
+	glScaled(0.9, 1, 0.8);
+	glTranslated(1, 3.5, -2);
+	floor_buildingR();
+	glPopMatrix();
+}
+
+void box1_buildingR() {
+	glPushMatrix();
+	glTranslated(12, 1, -2.5);
+	glScaled(4, 2, 2);
+	cube();
+	glPopMatrix();
+}
+
+void doors_buildingR() {
+	//door 1
+	glPushMatrix();
+	glTranslated(18, 1.5, -7.5);
+	doorFrames_terminal();
+	doorPanel_terminal();
+	glPopMatrix();
+
+	//door back
+	glPushMatrix();
+	glTranslated(25, 1.5, -23.3);
+	doorFrames_terminal();
+	doorPanel_terminal();
+	glPopMatrix();
+}
+
+void sideWindow_buildingR() {
+
+	glPushMatrix();
+	//glRotated(90, 0, 1, 0);
+	glTranslated(9.7, 1, -6);
+	glScaled(0.5, 0.5, 0.5);
+	glBegin(GL_QUADS);
+
+	glColor3f(0.2f, 0.2f, 0.2f);
+	glVertex3f(25.01, 0, 0);
+	glVertex3f(35.01, 0, -15);
+	glVertex3f(35.01, 3.5, -15);
+	glVertex3f(25.01, 3.5, 0);
+
+	glEnd();
+	glPopMatrix();
+}
+
+void buildingR() {
+	mainWalls_buildingR();
+	floor_buildingR();
+	roof_buildingR();
+	box1_buildingR();
+	doors_buildingR();
+	sideWindow_buildingR();
+}
+
+// building left
+
+void longerSupportBuilding_buildingL() {
+	glPushMatrix();
+	glTranslated(-16, 1, -11);
+	glScaled(12, 2, 3);
+	cube();
+	glPopMatrix();
+}
+
+void normalBuilding_buildingL() {
+	glPushMatrix();
+	glTranslated(-19, 1.5, -5);
+	glScaled(12, 3, 10);
+	cube();
+	glPopMatrix();
+}
+
+void supportBuilding_buildingL() {
+	glPushMatrix();
+	glTranslated(-25, 1, -5);
+	glScaled(12, 2, 8);
+	cube();
+	glPopMatrix();
+}
+
+void longerBuilding_buildingL() {
+	glPushMatrix();
+	glTranslated(-22, 1, -15);
+	glScaled(18, 2, 2);
+	cube();
+	glPopMatrix();
+}
+
+void floor_buildingL() {
+	glPushMatrix();
+	glTranslated(-22, -0.05, -8);
+	glScaled(22, 0.2, 20);
+	cube();
+	glPopMatrix();
+}
+
+void buildingL() {
+	longerSupportBuilding_buildingL();
+	normalBuilding_buildingL();
+	supportBuilding_buildingL();
+	longerBuilding_buildingL();
+	floor_buildingL();
+}
+
+// pier
+
+void wallSegment_pier() {
+	// front wall
+	glPushMatrix();
+	//glRotated(90, 0, 1, 0);
+	//glTranslated(-10, 0, 0);
+	glBegin(GL_QUADS);
+
+	glColor3f(0.0f, 0.5f, 0.5f);
+	glVertex3f(-10, 0, 0);
+	glVertex3f(-10, 2.5, 0);
+	glVertex3f(-10, 2.5, -3);
+	glVertex3f(-10, 0, -3);
+
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(-10, 0, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 2.5, 0);
+	glVertex3f(-10, 2.5, 0);
+
+	glColor3f(0.6f, 0.6f, 0.5f);
+	glVertex3f(0, 0, 0);
+	glVertex3f(2.5, 0, 3);
+	glVertex3f(2.5, 2.5, 3);
+	glVertex3f(0, 2.5, 0);
+
+	glColor3f(0.7f, 0.5f, 0.7f);
+	glVertex3f(2.5, 0, 3);
+	glVertex3f(5, 0, 0);
+	glVertex3f(5, 2.5, 0);
+	glVertex3f(2.5, 2.5, 3);
+
+	glColor3f(0.7f, 0.6f, 0.7f);
+	glVertex3f(5, 0, 0);
+	glVertex3f(15, 0, 0);
+	glVertex3f(15, 2.5, 0);
+	glVertex3f(5, 2.5, 0);
+
+	glEnd();
+	glPopMatrix();
+}
+
+void wallSideSegment_pier() {
+	glPushMatrix();
+	wallSegment_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotated(180, 0, 1, 0);
+	glTranslated(-5, 0, 3);
+	wallSegment_pier();
+	glPopMatrix();
+
+	/*glPushMatrix();
+	glTranslated(15, 0, 0);
+	wallSegment_pier();
+	glPopMatrix();*/
+
+	/*glPushMatrix();
+	glTranslated(30, 0, 0);
+	wallSegment_pier();
+	glPopMatrix();*/
+}
+
+void roofSegment_pier() {
+	glPushMatrix();
+	//glRotated(90, 0, 1, 0);
+	//glTranslated(-10, 0, 0);
+	glBegin(GL_QUADS);
+
+	// rectangle
+	glColor3f(0.0f, 0.5f, 0.5f);
+	glVertex3f(-10, 2.5, 0);
+	glVertex3f(15, 2.5, 0);
+	glVertex3f(15, 2.5, -3);
+	glVertex3f(-10, 2.5, -3);
+
+	glEnd();
+
+	// two triangles
+	glBegin(GL_TRIANGLES);
+
+	glColor3f(0.0f, 0.5f, 0.5f);
+	glVertex3f(0, 2.5, 0);
+	glVertex3f(2.5, 2.5, 3);
+	glVertex3f(5, 2.5, 0);
+
+	glColor3f(0.0f, 0.5f, 0.5f);
+	glVertex3f(0, 2.5, -3);
+	glVertex3f(2.5, 2.5, -6);
+	glVertex3f(5, 2.5, -3);
+
+	glEnd();
+
+	glPopMatrix();
+}
+
+void completeRoofSegment_pier() {
+
+	glPushMatrix();
+	roofSegment_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0, 0.24, 0);
+	roofSegment_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0, 2.5, 0);
+	glScaled(1, 0.1, 1);
+	wallSideSegment_pier();
+	glPopMatrix();
+}
+
+void scaledRoofSegment_pier() {
+	glPushMatrix();
+	glTranslated(0, 0, 0.5);
+	glScaled(1.1, 1, 1.4);
+	completeRoofSegment_pier();
+	glPopMatrix();
+}
+
+void floorSegment_pier() {
+	glPushMatrix();
+	glTranslated(0, -2.75, 0);
+	glScaled(0.95, 1, 0.9);
+	scaledRoofSegment_pier();
+	glPopMatrix();
+}
+
+void single_pier() {
+	wallSideSegment_pier();
+	scaledRoofSegment_pier();
+	floorSegment_pier();
+}
+
+void pier() {
+	glPushMatrix();
+	single_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(25, 0, 0);
+	single_pier();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(50, 0, 0);
+	single_pier();
+	glPopMatrix();
+}
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -454,7 +800,10 @@ void display(void)
 	// Drawing
 	//jetBridge();
 
-	terminal();
+	//terminal();
+	//buildingR();
+	//buildingL();
+	pier();
 
 	glPopMatrix();
 	glutSwapBuffers();
