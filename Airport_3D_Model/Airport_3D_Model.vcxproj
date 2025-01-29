@@ -20,14 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BuildingLeft.cpp" />
+    <ClCompile Include="BuildingRight.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="JetBridge.cpp" />
     <ClCompile Include="Pier.cpp" />
     <ClCompile Include="source.cpp" />
+    <ClCompile Include="Terminal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BuildingLeft.h" />
+    <ClInclude Include="BuildingRight.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="JetBridge.h" />
     <ClInclude Include="Pier.h" />
+    <ClInclude Include="Terminal.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

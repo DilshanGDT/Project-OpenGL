@@ -10,7 +10,7 @@ extern GLuint buildingLeftTextures[6];
 //void loadPierTextures();
 
 // Declare the pier functions
-void cube();
+void cube_buildingL();
 void longerSupportBuilding_buildingL();
 void normalBuilding_buildingL();
 void supportBuilding_buildingL();
