@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JetBridge.cpp" />
+    <ClCompile Include="Pier.cpp" />
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JetBridge.h" />
+    <ClInclude Include="Pier.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
