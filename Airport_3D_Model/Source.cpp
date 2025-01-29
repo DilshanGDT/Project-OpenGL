@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include <SOIL2.h>
 
-#include "JetBridge.h"	// JetBridge class
-#include "Pier.h"		// Pier class
+#include "JetBridge.h"		// JetBridge class
+#include "Pier.h"			// Pier class
+#include "BuildingLeft.h"	// Left Building class
 
 // Variables to move the camera
 GLfloat camXInit = 0.0;		GLfloat camYInit = 0.0;		GLfloat camZInit = 0.0;
@@ -540,7 +541,7 @@ void doors_buildingR() {
 
 	//door back
 	glPushMatrix();
-	glTranslated(25, 1.5, -23.3);
+	glTranslated(13, 1.5, -23.3);
 	doorFrames_terminal();
 	doorPanel_terminal();
 	glPopMatrix();
@@ -575,53 +576,53 @@ void buildingR() {
 
 // building left
 
-void longerSupportBuilding_buildingL() {
-	glPushMatrix();
-	glTranslated(-16, 1, -11);
-	glScaled(12, 2, 3);
-	cube();
-	glPopMatrix();
-}
-
-void normalBuilding_buildingL() {
-	glPushMatrix();
-	glTranslated(-19, 1.5, -5);
-	glScaled(12, 3, 10);
-	cube();
-	glPopMatrix();
-}
-
-void supportBuilding_buildingL() {
-	glPushMatrix();
-	glTranslated(-25, 1, -5);
-	glScaled(12, 2, 8);
-	cube();
-	glPopMatrix();
-}
-
-void longerBuilding_buildingL() {
-	glPushMatrix();
-	glTranslated(-22, 1, -15);
-	glScaled(18, 2, 2);
-	cube();
-	glPopMatrix();
-}
-
-void floor_buildingL() {
-	glPushMatrix();
-	glTranslated(-22, -0.05, -8);
-	glScaled(22, 0.2, 20);
-	cube();
-	glPopMatrix();
-}
-
-void buildingL() {
-	longerSupportBuilding_buildingL();
-	normalBuilding_buildingL();
-	supportBuilding_buildingL();
-	longerBuilding_buildingL();
-	floor_buildingL();
-}
+//void longerSupportBuilding_buildingL() {
+//	glPushMatrix();
+//	glTranslated(-16, 1, -11);
+//	glScaled(12, 2, 3);
+//	cube();
+//	glPopMatrix();
+//}
+//
+//void normalBuilding_buildingL() {
+//	glPushMatrix();
+//	glTranslated(-19, 1.5, -5);
+//	glScaled(12, 3, 10);
+//	cube();
+//	glPopMatrix();
+//}
+//
+//void supportBuilding_buildingL() {
+//	glPushMatrix();
+//	glTranslated(-25, 1, -5);
+//	glScaled(12, 2, 8);
+//	cube();
+//	glPopMatrix();
+//}
+//
+//void longerBuilding_buildingL() {
+//	glPushMatrix();
+//	glTranslated(-22, 1, -15);
+//	glScaled(18, 2, 2);
+//	cube();
+//	glPopMatrix();
+//}
+//
+//void floor_buildingL() {
+//	glPushMatrix();
+//	glTranslated(-22, -0.05, -8);
+//	glScaled(22, 0.2, 20);
+//	cube();
+//	glPopMatrix();
+//}
+//
+//void buildingL() {
+//	longerSupportBuilding_buildingL();
+//	normalBuilding_buildingL();
+//	supportBuilding_buildingL();
+//	longerBuilding_buildingL();
+//	floor_buildingL();
+//}
 
 void display(void)
 {

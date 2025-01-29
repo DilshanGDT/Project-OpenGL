@@ -208,7 +208,7 @@ void twoPiers() {
 	glPushMatrix();
 	glRotated(90, 0, 1, 0);
 	glScaled(0.8, 0.8, 0.8);
-	glTranslated(35, 0, 23);
+	glTranslated(30, 0, 34);
 	pier();
 	glPopMatrix();
 }

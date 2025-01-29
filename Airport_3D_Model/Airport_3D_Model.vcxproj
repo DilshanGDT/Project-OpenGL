@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BuildingLeft.cpp" />
     <ClCompile Include="JetBridge.cpp" />
     <ClCompile Include="Pier.cpp" />
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuildingLeft.h" />
     <ClInclude Include="JetBridge.h" />
     <ClInclude Include="Pier.h" />
   </ItemGroup>
