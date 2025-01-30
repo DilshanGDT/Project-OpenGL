@@ -1,0 +1,13 @@
+﻿  BuildingLeft.cpp
+  BuildingRight.cpp
+  Floor.cpp
+  JetBridge.cpp
+  Main.cpp
+  Pier.cpp
+  Terminal.cpp
+  Generating Code...
+soil2-debug.lib(image_DXT.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(image_DXT.obj)' or at ''; linking object as if no debug info
+soil2-debug.lib(image_helper.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(image_helper.obj)' or at ''; linking object as if no debug info
+soil2-debug.lib(SOIL2.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(SOIL2.obj)' or at ''; linking object as if no debug info
+soil2-debug.lib(wfETC.obj) : warning LNK4099: PDB '' was not found with 'soil2-debug.lib(wfETC.obj)' or at ''; linking object as if no debug info
+  Project_01.vcxproj -> C:\Users\Dilshan\Documents\VS Code\CSC_3081\S19355_ProjectFiles\Debug\Project_01.exe
