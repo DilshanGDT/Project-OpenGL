@@ -152,6 +152,15 @@ void setLightingandShading()
 	glMateriali(GL_FRONT, GL_SHININESS, shiness);
 }
 
+// --------airplane try-------------
+
+
+
+
+//----------------------------------
+
+
+
 // Drawing Function Goes Here
 void mainBuildings() {
 
@@ -166,11 +175,6 @@ void mainBuildings() {
 
 	glPopMatrix();
 }
-
-
-
-
-
 
 void display(void)
 {
@@ -198,7 +202,6 @@ void display(void)
 
 	mainBuildings();
 	airportFloor();
-	
 
 	glPopMatrix();
 	glutSwapBuffers();
@@ -313,7 +316,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(0, 0);
-	glutCreateWindow("Bandaranaike_International_Airport_JetBridge");
+	glutCreateWindow("Bandaranaike International Ariport 3D Model");
 
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(keyboardSpecial);
