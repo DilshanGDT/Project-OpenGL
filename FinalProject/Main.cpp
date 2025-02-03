@@ -10,12 +10,12 @@
 #include <tuple>
 #include <SOIL2.h>
 
-#include "Pier.h"			// Pier class
-#include "BuildingLeft.h"	// Left Building class
-#include "BuildingRight.h"	// Right Building class
-#include "Terminal.h"		// Terminal class
-#include "Floor.h"			// Airport floor class
-#include "JetBridge.h"		// Jetbridge
+#include "Pier.h"		   // Pier class
+#include "BuildingLeft.h"  // Left Building class
+#include "BuildingRight.h" // Right Building class
+#include "Terminal.h"	   // Terminal class
+#include "Floor.h"		   // Airport floor class
+#include "JetBridge.h"	   // Jetbridge
 
 int frameNumber = 0;
 
@@ -25,36 +25,37 @@ bool isl2On = true;
 bool isl3On = true;
 
 // Lightning
-GLfloat light1_pos[] = { -10.0, 1.0, -0.5, 1.0 };	// First light position
-GLfloat light2_pos[] = { 10.0, 1.0, -0.5, 1.0 };	// Second light position
-GLfloat light3_pos[] = { 0.0, 10.0, 0.0, 1.0 };		// Third light position
+GLfloat light1_pos[] = {-10.0, 1.0, -0.5, 1.0}; // First light position
+GLfloat light2_pos[] = {10.0, 1.0, -0.5, 1.0};	// Second light position
+GLfloat light3_pos[] = {0.0, 10.0, 0.0, 1.0};	// Third light position
 
-void setLightingAndShading() {
+void setLightingAndShading()
+{
 	glEnable(GL_LIGHTING);
 
 	// First Light Source (GL_LIGHT0) - White light
-	GLfloat l0amb[] = { 0.2, 0.2, 0.2, 1.0 };
-	GLfloat l0diff[] = { 0.8, 0.8, 0.8, 1.0 };
-	GLfloat l0spec[] = { 0.2, 0.2, 0.2, 1.0 };
+	GLfloat l0amb[] = {0.2, 0.2, 0.2, 1.0};
+	GLfloat l0diff[] = {0.8, 0.8, 0.8, 1.0};
+	GLfloat l0spec[] = {0.2, 0.2, 0.2, 1.0};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, l0amb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, l0diff);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, l0spec);
 	glLightfv(GL_LIGHT0, GL_POSITION, light1_pos);
 
 	// Second Light Source (GL_LIGHT1) - Yellow tinted light
-	GLfloat l1amb[] = { 0.2, 0.2, 0.2, 1.0 };
-	GLfloat l1diff[] = { 0.8, 0.8, 0.8, 1.0 };
-	GLfloat l1spec[] = { 0.2, 0.2, 0.2, 1.0 };
+	GLfloat l1amb[] = {0.2, 0.2, 0.2, 1.0};
+	GLfloat l1diff[] = {0.8, 0.8, 0.8, 1.0};
+	GLfloat l1spec[] = {0.2, 0.2, 0.2, 1.0};
 	glLightfv(GL_LIGHT1, GL_AMBIENT, l1amb);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, l1diff);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, l1spec);
 	glLightfv(GL_LIGHT1, GL_POSITION, light2_pos);
 
 	// Third Light Source (GL_LIGHT2) - Same color as the first two
-	GLfloat l2amb[] = { 0.2, 0.2, 0.2, 1.0 };
-	GLfloat l2diff[] = { 0.8, 0.8, 0.8, 1.0 };
-	GLfloat l2spec[] = { 0.2, 0.2, 0.2, 1.0 };
-	
+	GLfloat l2amb[] = {0.2, 0.2, 0.2, 1.0};
+	GLfloat l2diff[] = {0.8, 0.8, 0.8, 1.0};
+	GLfloat l2spec[] = {0.2, 0.2, 0.2, 1.0};
+
 	glLightfv(GL_LIGHT2, GL_AMBIENT, l2amb);
 	glLightfv(GL_LIGHT2, GL_DIFFUSE, l2diff);
 	glLightfv(GL_LIGHT2, GL_SPECULAR, l2spec);
@@ -65,7 +66,7 @@ void setLightingAndShading() {
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
 	// Material specular reflection
-	GLfloat specRef[] = { 0.7, 0.7, 0.7, 1.0 };
+	GLfloat specRef[] = {0.7, 0.7, 0.7, 1.0};
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specRef);
 	glMateriali(GL_FRONT, GL_SHININESS, 128);
 
@@ -75,9 +76,9 @@ void setLightingAndShading() {
 }
 
 std::tuple<float, float, float> calculateNormal(
-	const std::tuple<float, float, float>& v1,
-	const std::tuple<float, float, float>& v2,
-	const std::tuple<float, float, float>& v3)
+	const std::tuple<float, float, float> &v1,
+	const std::tuple<float, float, float> &v2,
+	const std::tuple<float, float, float> &v3)
 {
 	float x1 = std::get<0>(v2) - std::get<0>(v1);
 	float y1 = std::get<1>(v2) - std::get<1>(v1);
@@ -93,53 +94,67 @@ std::tuple<float, float, float> calculateNormal(
 
 	// Normalize the normal vector
 	float length = sqrt(nx * nx + ny * ny + nz * nz);
-	return { nx / length, ny / length, nz / length };
+	return {nx / length, ny / length, nz / length};
 }
 
 // Variables to move the camera
-GLfloat camX = 0.0; GLfloat camY = 0.0; GLfloat camZ = 0.0;
+GLfloat camX = 0.0;
+GLfloat camY = 0.0;
+GLfloat camZ = 0.0;
 
 // Variables to move the scene
-GLfloat sceRX = 0.0; GLfloat sceRY = 0.0; GLfloat sceRZ = 0.0;
-GLfloat sceTX = 0.0; GLfloat sceTY = 0.0; GLfloat sceTZ = 0.0;
+GLfloat sceRX = 0.0;
+GLfloat sceRY = 0.0;
+GLfloat sceRZ = 0.0;
+GLfloat sceTX = 0.0;
+GLfloat sceTY = 0.0;
+GLfloat sceTZ = 0.0;
 
 // Variables to move the objects
-GLfloat objRX = 0.0; GLfloat objRY = 0.0; GLfloat objRZ = 0.0;
-GLfloat objTX = 0.0; GLfloat objTY = 0.0; GLfloat objTZ = 0.0;
+GLfloat objRX = 0.0;
+GLfloat objRY = 0.0;
+GLfloat objRZ = 0.0;
+GLfloat objTX = 0.0;
+GLfloat objTY = 0.0;
+GLfloat objTZ = 0.0;
 
 GLuint textures[6];
 
-void loadTextures() {
+void loadTextures()
+{
 	// Example for loading textures
-	const char* textureFiles[] = {
+	const char *textureFiles[] = {
 		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Sample Program/images/terminal/sky.jpg",
-		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Sample Program/images/terminal/door.jpg"
-	};
+		"C:/Users/Dilshan/Documents/VS Code/CSC_3081/Sample Program/images/terminal/door.jpg"};
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; i++)
+	{
 		textures[i] = SOIL_load_OGL_texture(
 			textureFiles[i],
 			SOIL_LOAD_AUTO,
 			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
-		);
+			SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
 
-		if (!textures[i]) {
+		if (!textures[i])
+		{
 			printf("Texture loading failed for %s: %s\n", textureFiles[i], SOIL_last_result());
 		}
-		else {
+		else
+		{
 			printf("Successfully loaded texture: %s\n", textureFiles[i]);
 		}
 	}
 }
 
 // Grid and coordinate axes for better visualization
-void drawGrid() {
+void drawGrid()
+{
 	GLfloat step = 1.0f;
 	GLint line;
 
 	glBegin(GL_LINES);
-	for (line = -20; line <= 20; line += step) {
+	for (line = -20; line <= 20; line += step)
+	{
 		glVertex3f(line, -0.4, 20);
 		glVertex3f(line, -0.4, -20);
 
@@ -149,7 +164,8 @@ void drawGrid() {
 	glEnd();
 }
 
-void drawAxes() {
+void drawAxes()
+{
 	glBegin(GL_LINES);
 
 	glLineWidth(1.5);
@@ -169,7 +185,8 @@ void drawAxes() {
 	glEnd();
 }
 
-void init(void) {
+void init(void)
+{
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
@@ -187,24 +204,29 @@ void init(void) {
 std::vector<std::vector<std::tuple<float, float, float>>> airplaneFaces;
 
 // Read vertices from the file
-void loadVerticesFromFile(const std::string& filename) {
+void loadVerticesFromFile(const std::string &filename)
+{
 	std::ifstream file(filename);
-	if (!file) {
+	if (!file)
+	{
 		std::cerr << "Could not open file: " << filename << std::endl;
 		return;
 	}
 
 	std::string line;
 	std::vector<std::tuple<float, float, float>> face;
-	while (getline(file, line)) {
-		if (line.find("Vertex") != std::string::npos) {
+	while (getline(file, line))
+	{
+		if (line.find("Vertex") != std::string::npos)
+		{
 			std::istringstream ss(line.substr(line.find("[") + 1));
 			float x, y, z;
 			char comma;
 			ss >> x >> comma >> y >> comma >> z;
 			face.emplace_back(x, y, z);
 
-			if (face.size() == 3) {
+			if (face.size() == 3)
+			{
 				airplaneFaces.push_back(face);
 				face.clear();
 			}
@@ -214,18 +236,22 @@ void loadVerticesFromFile(const std::string& filename) {
 }
 
 // Draw the airplane using vertices data
-void drawAirplane() {
-	glColor3f(0.5f, 0.5f, 0.5f); // Set the color of the airplane
+void drawAirplane()
+{
+	glColor3f(0.5f, 0.5f, 0.5f); // Set the color
 
-	for (const auto& face : airplaneFaces) {
-		if (face.size() < 3) continue;
+	for (const auto &face : airplaneFaces)
+	{
+		if (face.size() < 3)
+			continue;
 
 		// Calculate normal for the face
 		auto normal = calculateNormal(face[0], face[1], face[2]);
 		glNormal3f(std::get<0>(normal), std::get<1>(normal), std::get<2>(normal));
 
 		glBegin(GL_TRIANGLES);
-		for (const auto& vertex : face) {
+		for (const auto &vertex : face)
+		{
 			glVertex3f(std::get<0>(vertex), std::get<1>(vertex), std::get<2>(vertex));
 		}
 		glEnd();
@@ -234,7 +260,8 @@ void drawAirplane() {
 
 // Environment
 
-void mainBuildings() {
+void mainBuildings()
+{
 
 	glPushMatrix();
 	glTranslated(0, 0, 45);
@@ -248,9 +275,10 @@ void mainBuildings() {
 	glPopMatrix();
 }
 
-void lightTower() {
+void lightTower()
+{
 
-	GLUquadricObj* quad = gluNewQuadric();
+	GLUquadricObj *quad = gluNewQuadric();
 
 	glPushMatrix();
 	glColor3f(0.3, 0.5, 0.5);
@@ -265,8 +293,9 @@ void lightTower() {
 	glPopMatrix();
 }
 
-void lightTowers() {
-	
+void lightTowers()
+{
+
 	// terminal front
 	glPushMatrix();
 	glTranslated(-78, 0, 58.5);
@@ -274,7 +303,8 @@ void lightTowers() {
 	glPopMatrix();
 
 	int j = 20;
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 9; i++)
+	{
 		glPushMatrix();
 		glTranslated(-78 + j, 0, 58.5);
 		lightTower();
@@ -289,7 +319,8 @@ void lightTowers() {
 	glPopMatrix();
 
 	j = 20;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; i++)
+	{
 		glPushMatrix();
 		glTranslated(-78, 0, 58.5 - j);
 		lightTower();
@@ -297,7 +328,7 @@ void lightTowers() {
 		glPopMatrix();
 	}
 
-	//other towers (back of the terminal)
+	// other towers (back of the terminal)
 	glPushMatrix();
 	glTranslated(-63, 0, 5);
 	lightTower();
@@ -338,14 +369,15 @@ void lightTowers() {
 	lightTower();
 	glPopMatrix();
 
-	//runaway 1
+	// runaway 1
 	glPushMatrix();
 	glTranslated(95, -3, -158.5);
 	lightTower();
 	glPopMatrix();
 
 	j = 20;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; i++)
+	{
 		glPushMatrix();
 		glTranslated(95 - j, -3, -158.5);
 		lightTower();
@@ -353,14 +385,15 @@ void lightTowers() {
 		glPopMatrix();
 	}
 
-	//runaway 2
+	// runaway 2
 	glPushMatrix();
 	glTranslated(95, -3, -188.5);
 	lightTower();
 	glPopMatrix();
 
 	j = 20;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; i++)
+	{
 		glPushMatrix();
 		glTranslated(95 - j, -3, -188.5);
 		lightTower();
@@ -368,7 +401,7 @@ void lightTowers() {
 		glPopMatrix();
 	}
 
-	//flight parking
+	// flight parking
 	glPushMatrix();
 	glTranslated(92, 0, -124);
 	lightTower();
@@ -390,7 +423,8 @@ void lightTowers() {
 	glPopMatrix();
 }
 
-void tree() {
+void tree()
+{
 	glPushMatrix();
 	glBegin(GL_TRIANGLES);
 
@@ -459,7 +493,8 @@ void tree() {
 	glPopMatrix();
 }
 
-void tree2() {
+void tree2()
+{
 	glPushMatrix();
 	glBegin(GL_TRIANGLES);
 
@@ -528,11 +563,13 @@ void tree2() {
 	glPopMatrix();
 }
 
-void trees() {
+void trees()
+{
 
 	// terminal left
 	int j = 0;
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 12; i++)
+	{
 		glPushMatrix();
 		glTranslated(-75 + j, 0, 75);
 		glScaled(2, 2, 2);
@@ -542,7 +579,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 12; i++)
+	{
 		glPushMatrix();
 		glTranslated(-75 + j, 0, 65);
 		glScaled(2, 2, 2);
@@ -572,7 +610,8 @@ void trees() {
 
 	// terminal right
 	j = 0;
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 9; i++)
+	{
 		glPushMatrix();
 		glTranslated(58 + j, 0, 75);
 		glScaled(2, 2, 2);
@@ -582,7 +621,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 9; i++)
+	{
 		glPushMatrix();
 		glTranslated(58 + j, 0, 65);
 		glScaled(2, 2, 2);
@@ -593,7 +633,8 @@ void trees() {
 
 	// building right
 	j = 0;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; i++)
+	{
 		glPushMatrix();
 		glTranslated(50 + j, 0, 45);
 		glScaled(2, 2, 2);
@@ -603,7 +644,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < 7; i++)
+	{
 		glPushMatrix();
 		glTranslated(55 + j, 0, 38);
 		glScaled(2, 2, 2);
@@ -613,7 +655,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 6; i++)
+	{
 		glPushMatrix();
 		glTranslated(60 + j, 0, 31);
 		glScaled(2, 2, 2);
@@ -623,7 +666,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; i++)
+	{
 		glPushMatrix();
 		glTranslated(65 + j, 0, 24);
 		glScaled(2, 2, 2);
@@ -633,7 +677,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++)
+	{
 		glPushMatrix();
 		glTranslated(70 + j, 0, 17);
 		glScaled(2, 2, 2);
@@ -643,7 +688,8 @@ void trees() {
 	}
 
 	j = 0;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++)
+	{
 		glPushMatrix();
 		glTranslated(75 + j, 0, 10);
 		glScaled(2, 2, 2);
@@ -654,7 +700,8 @@ void trees() {
 
 	// near left building
 	j = 0;
-	for (int i = 0; i < 13; i++) {
+	for (int i = 0; i < 13; i++)
+	{
 		glPushMatrix();
 		glTranslated(-56.5, 0, -4 - j);
 		glScaled(3, 3, 3);
@@ -719,7 +766,8 @@ void trees() {
 	glPopMatrix();
 }
 
-void jetBridges() {
+void jetBridges()
+{
 
 	// set 1 left
 	glPushMatrix();
@@ -808,7 +856,8 @@ void jetBridges() {
 	glPopMatrix();
 }
 
-void airplaneCorrectAngle() {
+void airplaneCorrectAngle()
+{
 	glPushMatrix();
 	glScaled(30, 20, 35);
 	glTranslated(0, 0, 0);
@@ -817,7 +866,8 @@ void airplaneCorrectAngle() {
 	glPopMatrix();
 }
 
-void airplane() {
+void airplane()
+{
 	glPushMatrix();
 	glRotated(-40, 0, 1, 0);
 	glTranslated(5, -5, -20);
@@ -825,7 +875,8 @@ void airplane() {
 	glPopMatrix();
 }
 
-void airplaneMovable() {
+void airplaneMovable()
+{
 	glPushMatrix();
 	glRotated(-40, 0, 1, 0);
 	glTranslated(5, -5, -20);
@@ -833,7 +884,8 @@ void airplaneMovable() {
 	glPopMatrix();
 }
 
-void airplaneParking() {
+void airplaneParking()
+{
 	// middle set
 	airplane();
 
@@ -863,7 +915,7 @@ void airplaneParking() {
 	airplane();
 	glPopMatrix();*/
 
-	//left set
+	// left set
 	glPushMatrix();
 	glRotated(80, 0, 1, 0);
 	glTranslated(-6, 0, -25);
@@ -877,7 +929,8 @@ void airplaneParking() {
 	glPopMatrix();
 }
 
-void movablePlane(GLfloat x, GLfloat y, GLfloat z) {
+void movablePlane(GLfloat x, GLfloat y, GLfloat z)
+{
 	glPushMatrix();
 	glTranslated(65 + x, 0, -40 + z);
 	glRotated(y, 0, 1, 0);
@@ -885,7 +938,8 @@ void movablePlane(GLfloat x, GLfloat y, GLfloat z) {
 	glPopMatrix();
 }
 
-void animatedPlane() {
+void animatedPlane()
+{
 	glPushMatrix();
 	glTranslated(-40, 0, -138);
 	glRotated(130, 0, 1, 0);
@@ -893,14 +947,15 @@ void animatedPlane() {
 	glPopMatrix();
 }
 
-void fullEnvironment() {
+void fullEnvironment()
+{
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textures[0]);  // Bind your texture here
+	glBindTexture(GL_TEXTURE_2D, textures[0]); // Bind your texture here
 
 	glPushMatrix();
 
 	// Create a new quadric object for the sphere
-	GLUquadricObj* quad = gluNewQuadric();
+	GLUquadricObj *quad = gluNewQuadric();
 
 	// Enable automatic texture coordinate generation for the sphere
 	gluQuadricTexture(quad, GL_TRUE);
@@ -913,7 +968,8 @@ void fullEnvironment() {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void display(void) {
+void display(void)
+{
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
@@ -926,10 +982,10 @@ void display(void) {
 	glRotatef(sceRY, 0.0, 1.0, 0.0);
 
 	// Draw the floor
-	//drawFloor();
+	// drawFloor();
 
 	// Draw the grid
-	//drawGrid();
+	// drawGrid();
 
 	// Draw the axes
 	drawAxes();
@@ -948,7 +1004,7 @@ void display(void) {
 
 	// animated plane
 	glPushMatrix();
-	glTranslated(10 * (frameNumber % 30)/1.5 - 10, (frameNumber % 30) / 1.5, 0);
+	glTranslated(10 * (frameNumber % 30) / 1.5 - 10, (frameNumber % 30) / 1.5, 0);
 	animatedPlane();
 	glPopMatrix();
 
@@ -975,7 +1031,8 @@ void doFrame(int v)
 	glutTimerFunc(80, doFrame, 0);
 }
 
-void reshape(GLsizei w, GLsizei h) {
+void reshape(GLsizei w, GLsizei h)
+{
 	glViewport(0, 0, w, h);
 	GLfloat aspect_ratio = h == 0 ? w / 1 : (GLfloat)w / (GLfloat)h;
 
@@ -983,12 +1040,13 @@ void reshape(GLsizei w, GLsizei h) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// Define the Perspective projection frustum 
+	// Define the Perspective projection frustum
 	// (FOV_in_vertical, aspect_ratio, z-distance to the near plane from the camera position, z-distance to far plane from the camera position)
 	gluPerspective(120.0, aspect_ratio, 1.0, 100.0);
 }
 
-void keyboardSpecial(int key, int x, int y) {
+void keyboardSpecial(int key, int x, int y)
+{
 	if (key == GLUT_KEY_UP)
 		camY += 0.5;
 
@@ -1004,9 +1062,10 @@ void keyboardSpecial(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-void keyboard(unsigned char key, int x, int y) {
+void keyboard(unsigned char key, int x, int y)
+{
 
-	//move one plane
+	// move one plane
 	if (key == 'j')
 		objRY += 0.5;
 
@@ -1038,38 +1097,47 @@ void keyboard(unsigned char key, int x, int y) {
 		sceRY -= 0.5;
 
 	if (key == '1')
-		if (!isl1On) {
+		if (!isl1On)
+		{
 			glEnable(GL_LIGHT0);
 			isl1On = true;
 		}
-		else {
+		else
+		{
 			glDisable(GL_LIGHT0);
 			isl1On = false;
 		}
 	if (key == '2')
-		if (!isl1On) {
+		if (!isl1On)
+		{
 			glEnable(GL_LIGHT1);
 			isl1On = true;
 		}
-		else {
+		else
+		{
 			glDisable(GL_LIGHT1);
 			isl1On = false;
 		}
 
-	if (key == '3') {
-    if (!isl3On) {
-        glEnable(GL_LIGHT2);
-        isl3On = true;
-    } else {
-        glDisable(GL_LIGHT2);
-        isl3On = false;
-    }
-}
+	if (key == '3')
+	{
+		if (!isl3On)
+		{
+			glEnable(GL_LIGHT2);
+			isl3On = true;
+		}
+		else
+		{
+			glDisable(GL_LIGHT2);
+			isl3On = false;
+		}
+	}
 
 	glutPostRedisplay();
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
 	glutInit(&argc, argv); // Initialize GLUT with command-line arguments
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(800, 600);
